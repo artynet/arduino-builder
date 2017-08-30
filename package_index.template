@@ -30,12 +30,19 @@
               "size": "%%SIZE_LINUX_386%%",
               "checksum": "SHA-256:%%SHA_LINUX_386%%"
             },
-						{
+            {
               "host": "mips-linux-gnu",
               "url": "http://download.arduino.org/tools/%%FILENAME_LINUX_MIPS%%",
               "archiveFileName": "%%FILENAME_LINUX_MIPS%%",
-              "size": "%%SIZE_LINUX_386%%",
+              "size": "%%SIZE_LINUX_MIPS%%",
               "checksum": "SHA-256:%%SHA_LINUX_MIPS%%"
+            },
+            {
+              "host": "mipsle-linux-gnu",
+              "url": "http://download.arduino.org/tools/%%FILENAME_LINUX_MIPSLE%%",
+              "archiveFileName": "%%FILENAME_LINUX_MIPSLE%%",
+              "size": "%%SIZE_LINUX_MIPSLE%%",
+              "checksum": "SHA-256:%%SHA_LINUX_MIPSLE%%"
             },
             {
               "host": "i686-mingw32",
