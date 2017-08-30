@@ -6,7 +6,7 @@ VERSION=`cat src/arduino.cc/arduino-builder/main.go| grep "const VERSION" |cut -
 
 export GOPATH=$PWD
 
-declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_mips" "darwin_amd64" "windows_386")
+declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_mips" "linux_mipsle" "darwin_amd64" "windows_386")
 
 rm -rf distrib
 mkdir distrib
