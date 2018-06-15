@@ -1,6 +1,8 @@
 #!/bin/bash -xe
 
-VERSION=`cat src/arduino.cc/arduino-builder/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
+BUILDPATH="github.com/arduino/arduino-builder/arduino-builder"
+
+VERSION=`cat src/${BUILDPATH}/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
 #Remember to set GOROOT accordingly with your installation
 
@@ -19,7 +21,7 @@ do
    rm -rf bin
    mkdir bin
    IFS=_ read -a fields <<< $folder
-   GOOS=${fields[0]} GOARCH=${fields[1]} go build arduino.cc/arduino-builder
+   GOOS=${fields[0]} GOARCH=${fields[1]} go build ${BUILDPATH}
    FILENAME=arduino-builder-${VERSION}-${folder}.tar.bz2
    cp -r  arduino-builder* bin
    tar cjvf ${FILENAME} bin/
@@ -36,6 +38,9 @@ do
 done
 
 set +x
+
+# restoring original folder
+git checkout arduino-builder/
 
 echo ================== CUT ME HERE =====================
 
