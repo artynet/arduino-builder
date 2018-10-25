@@ -1,6 +1,18 @@
 #!/bin/bash -x
 
-export GOPATH=$PWD
+checkgopath () {
+
+    GOPATH=$(printenv GOPATH)
+
+    if [ -z $GOPATH ]
+    then
+        mkdir -p ${HOME}/go
+        export GOPATH=${HOME}/go
+    fi
+
+}
+
+checkgopath
 
 go get github.com/go-errors/errors
 go get github.com/stretchr/testify
