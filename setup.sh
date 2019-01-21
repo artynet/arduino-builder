@@ -23,4 +23,5 @@ go get google.golang.org/grpc
 go get github.com/golang/protobuf/proto
 go get golang.org/x/net/context
 go get github.com/fsnotify/fsnotify
+rm -rf $GOPATH/src/arduino/arduino-builder
 go get github.com/arduino/arduino-builder
