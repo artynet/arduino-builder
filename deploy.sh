@@ -18,9 +18,9 @@ checkgopath
 
 # actual build
 
-BUILDPATH="$GOPATH/src/github.com/arduino/arduino-builder/arduino-builder"
+BUILDPATH="github.com/arduino/arduino-builder/arduino-builder"
 
-VERSION=`cat ${BUILDPATH}/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
+VERSION=`cat ${GOPATH}/src/${BUILDPATH}/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
 declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_mips" "linux_mipsle" "darwin_amd64" "windows_386")
 
