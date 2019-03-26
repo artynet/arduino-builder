@@ -28,3 +28,6 @@ go get github.com/golang/protobuf/proto
 go get golang.org/x/net/context
 go get github.com/fsnotify/fsnotify
 go get github.com/arduino/arduino-builder
+
+cd $GOPATH/src/github.com/arduino/arduino-builder
+git checkout 1.4.4
