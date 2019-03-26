@@ -33,11 +33,11 @@ for folder in "${target_folders[@]}"
 do
    rm -rf arduino-builder*
    rm -rf bin
-   mkdir bin
+   mkdir -p bin
    IFS=_ read -a fields <<< $folder
    GOOS=${fields[0]} GOARCH=${fields[1]} go build ${BUILDPATH}
    FILENAME=arduino-builder-${VERSION}-${folder}.tar.bz2
-   cp -r  arduino-builder* bin
+   cp -r arduino-builder* bin
    tar cjvf ${FILENAME} bin/
    T_OS=`echo ${folder} | awk '{print toupper($0)}'`
    SHASUM=`sha256sum ${FILENAME} | cut -f1 -d" "`
