@@ -12,7 +12,11 @@ checkgopath () {
 
 }
 
+# check if GOPATH variable is blank or not
 checkgopath
+
+# detect version
+VERSION=`cat arduino-builder/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
 # cleaning all go packages
 rm -rf $GOPATH/{pkg,src}/*
@@ -30,4 +34,4 @@ go get github.com/fsnotify/fsnotify
 go get github.com/arduino/arduino-builder
 
 cd $GOPATH/src/github.com/arduino/arduino-builder
-git checkout 1.4.4
+git checkout ${VERSION}
