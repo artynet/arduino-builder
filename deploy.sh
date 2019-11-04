@@ -18,10 +18,7 @@ checkgopath () {
 checkgopath
 
 # actual build
-
-BUILDPATH="github.com/arduino/arduino-builder/arduino-builder"
-
-VERSION=`cat ${GOPATH}/src/${BUILDPATH}/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
+VERSION=`cat main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
 declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_mips" "linux_mipsle" "darwin_amd64" "windows_386")
 
@@ -36,7 +33,7 @@ do
    rm -rf bin/
    mkdir -p bin
    IFS=_ read -a fields <<< $folder
-   GOOS=${fields[0]} GOARCH=${fields[1]} go build ${BUILDPATH}
+   GOOS=${fields[0]} GOARCH=${fields[1]} go build
    FILENAME=arduino-builder-${VERSION}-${folder}.tar.bz2
    cp -r arduino-builder* bin/
    tar cjvf ${FILENAME} bin/
@@ -59,7 +56,7 @@ rm -rf bin/
 rm arduino-builder*
 
 # restoring original folder
-git checkout arduino-builder/
+git checkout .
 
 echo ================== CUT ME HERE =====================
 

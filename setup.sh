@@ -16,7 +16,7 @@ checkgopath () {
 checkgopath
 
 # detect version
-VERSION=`cat arduino-builder/main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
+VERSION=`cat main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
 # cleaning all go packages
 rm -rf $GOPATH/{pkg,src}/*
@@ -31,7 +31,3 @@ go get google.golang.org/grpc
 go get github.com/golang/protobuf/proto
 go get golang.org/x/net/context
 go get github.com/fsnotify/fsnotify
-go get github.com/arduino/arduino-builder
-
-cd $GOPATH/src/github.com/arduino/arduino-builder
-git checkout ${VERSION}
