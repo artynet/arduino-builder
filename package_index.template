@@ -57,6 +57,13 @@
               "archiveFileName": "%%FILENAME_WINDOWS_386%%",
               "size": "%%SIZE_WINDOWS_386%%",
               "checksum": "SHA-256:%%SHA_WINDOWS_386%%"
+            },
+            {
+              "host": "x86_64-mingw32",
+              "url": "http://download.arduino.org/tools/%%FILENAME_WINDOWS_AMD64%%",
+              "archiveFileName": "%%FILENAME_WINDOWS_AMD64%%",
+              "size": "%%SIZE_WINDOWS_AMD64%%",
+              "checksum": "SHA-256:%%SHA_WINDOWS_AMD64%%"
             }
           ]
         }

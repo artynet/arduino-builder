@@ -20,7 +20,7 @@ checkgopath
 # actual build
 VERSION=`cat main.go| grep "const VERSION" |cut -f4 -d " " | tr -d '"'`
 
-declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_arm64" "linux_mips" "linux_mipsle" "darwin_amd64" "windows_386")
+declare -a target_folders=("linux_amd64" "linux_386" "linux_arm" "linux_arm64" "linux_mips" "linux_mipsle" "darwin_amd64" "windows_386" "windows_amd64")
 
 rm -rf distrib
 mkdir distrib
