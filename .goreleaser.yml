@@ -91,6 +91,8 @@ builds:
     goarch:
       - amd64
       - 386
+      - mips
+      - mipsle
     ldflags:
       - -s -w -X github.com/arduino/arduino-builder/version.versionString={{.Tag}} -X github.com/arduino/arduino-builder/version.commit={{ .ShortCommit }}
       - "-extldflags '-static'"
