@@ -1,0 +1,120 @@
+# Global section
+checksum:
+  name_template: '{{ .Tag }}-{{ time "20060102" }}-checksums.txt'
+
+snapshot:
+  name_template: 'g{{ .ShortCommit }}'
+
+release:
+  prerelease: auto
+
+changelog:
+  filters:
+    exclude:
+      - '^\[skip changelog\].*'
+      - '^\[changelog skip\].*'
+      - '^\[skip ci\].*'
+      - '^\[ci skip\].*'
+
+# We have multiple builds in order to fine tune
+# cross compilations.
+builds:
+  -
+    # OSX
+    id: arduino101load_osx
+    binary: arduino101load
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w -X github.com/facchinm/arduino101load/version.versionString={{.Tag}} -X github.com/facchinm/arduino101load/version.commit={{ .ShortCommit }}
+  -
+    # ARM
+    id: arduino101load_arm
+    binary: arduino101load
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - arm
+    goarm:
+      - 6
+    ldflags:
+      - -s -w -X github.com/facchinm/arduino101load/version.versionString={{.Tag}} -X github.com/facchinm/arduino101load/version.commit={{ .ShortCommit }}
+      - "-extldflags '-static'"
+  -
+    # ARMv7
+    id: arduino101load_armv7
+    binary: arduino101load
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - arm
+    goarm:
+      - 7
+    ldflags:
+      - -s -w -X github.com/facchinm/arduino101load/version.versionString={{.Tag}} -X github.com/facchinm/arduino101load/version.commit={{ .ShortCommit }}
+      - "-extldflags '-static'"
+  -
+    # ARM64
+    id: arduino101load_arm64
+    binary: arduino101load
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - arm64
+    ldflags:
+      - -s -w -X github.com/facchinm/arduino101load/version.versionString={{.Tag}} -X github.com/facchinm/arduino101load/version.commit={{ .ShortCommit }}
+      - "-extldflags '-static'"
+  -
+    # All the other platforms
+    id: arduino101load
+    binary: arduino101load
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - mips
+      - mipsle
+    ldflags:
+      - -s -w -X github.com/facchinm/arduino101load/version.versionString={{.Tag}} -X github.com/facchinm/arduino101load/version.commit={{ .ShortCommit }}
+      - "-extldflags '-static'"
+
+archives:
+  -
+    id: "arduino101load"
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    replacements:
+      amd64: 64bit
+      darwin: macOS
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      linux: Linux
+      windows: Windows
+    files:
+      - README.md
+      - LICENSE.txt
+
+blobs:
+  -
+    provider: s3
+    bucket: arduino-downloads-prod-beagle
+    ids:
+      - arduino101load
+    folder: "{{ .ProjectName }}"
